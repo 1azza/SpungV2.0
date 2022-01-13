@@ -1,0 +1,7 @@
+OTMwMTY2NTkxMDA0NDgzNjg0.Ydx7JA.JO3cOlJxSQQ8JsCn0T9rkceBE_M
+except:
+    config.configError()
+    return
+
+else:
+    bot.run(config.TOKEN)
