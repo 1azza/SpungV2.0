@@ -1,9 +1,11 @@
-from discord.ext import commands
 import discord
+from discord.ext import commands
+from discord.commands import slash_command, Option
 from scripts.utils.configHandle import config, bot
 import cv2
 import numpy as np
 import re
+
 class spung_commands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
