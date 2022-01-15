@@ -9,4 +9,4 @@ class ValueTooSmallError(Error):
 
 
 class InvalidBotToken(Error):
-    print('Please enter a bot token')
+    pass

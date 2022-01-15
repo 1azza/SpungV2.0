@@ -23,20 +23,21 @@ class spung_commands(commands.Cog):
             handler.write(img_data)
         self.IMG = cv2.imread(self.PATH)
         await self.main_spung(ctx)
+        print('Done!')
 
     async def main_spung(self, ctx):
         imgCanny =  cv2.Canny(self.IMG, 100, 100)
         cv2.imwrite(self.PATH, imgCanny)
         await ctx.respond(file=discord.File(self.PATH))
 
-    @slash_command(guild_ids=[861316984360402974], description="Spung another user")
+    @slash_command(guild_ids=config.GUILDS, description="Spung another user")
     async def spung(self, ctx, arg):
             user = re.sub("[^0-9]", "", arg)
             await self.dlAvatar(ctx, user)
 
 
 
-    @slash_command(guild_ids=[861316984360402974], description="Spung any image")
+    @slash_command(guild_ids=config.GUILDS, description="Spung any image")
     async def spunk(self, ctx):
         def check(message):
             return message.author == ctx.author and bool(message.attachments)

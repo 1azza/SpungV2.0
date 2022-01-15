@@ -3,11 +3,13 @@ Important:
     # Find your bot's token here: https://discordapp.com/developers/applications/me/
     # Create a new application, with no redirect URI or boxes ticked.
     # Then click 'Create Bot User' on the application page and copy the token here.
-    Token: 
+    Token:
 
 General:
     Prefix: .
     Admins: lazza#9954
     passwd: Natasha1102!
+    Guilds:
+      - 861316984360402974
 Visual:
-    Activity: .help
+    Activity: .help!

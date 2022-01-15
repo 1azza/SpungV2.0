@@ -20,6 +20,8 @@ class ConfigHandler:
             self.ADMINS = general.get('Admins')
             self.PASSWORD = general.get('Passwd')
             self.ACTIVITY = visual.get('Activity')
+            self.GUILDS = general.get('Guilds')
+            print(self.GUILDS)
             print('Found Token!')
             print(self.TOKEN)
 

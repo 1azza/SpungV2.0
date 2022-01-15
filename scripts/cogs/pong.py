@@ -19,7 +19,7 @@ class games(commands.Cog):
     async def pp(self, ctx):
             await ctx.respond('small')
 
-    @slash_command(guild_ids=[861316984360402974], description="Random number from 1-100")
+    @slash_command(guild_ids=config.GUILDS, description="Random number from 1-100")
     async def number(self, ctx):
             await ctx.respond(random.randint(1, 100))
 def setup(bot):

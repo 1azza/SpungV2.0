@@ -1,6 +1,8 @@
 from discord.ext import commands
 import discord
 from scripts.utils.configHandle import config, bot
+from discord.commands import slash_command, user_command
+from discord.commands import Option
 class Greetings(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -12,14 +14,14 @@ class Greetings(commands.Cog):
         if channel is not None:
             await channel.send('Welcome {0.mention}.'.format(member))
 
-    @commands.command()
+    @slash_command(guild_ids=config.GUILDS, description="Says Hello")
     async def hello(self, ctx, *, member: discord.Member = None):
         """Says hello"""
         member = member or ctx.author
         if self._last_member is None or self._last_member.id != member.id:
-            await ctx.send('Hello {0.name}~'.format(member))
+            await ctx.respond('Hello {0.name}~'.format(member))
         else:
-            await ctx.send('Hello {0.name}... This feels familiar.'.format(member))
+            await ctx.respond('Hello {0.name}... This feels familiar.'.format(member))
         self._last_member = member
 
 def setup(bot):
