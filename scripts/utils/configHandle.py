@@ -3,9 +3,14 @@ from yaml import Loader
 from discord.ext import commands
 from scripts.utils.exceptions import Error, InvalidBotToken
 import discord
+from colorama import init, Fore
 class ConfigHandler:
     def __init__(self):
-        print('Loading config...')
+        init(autoreset=True)
+        self.GREEN = Fore.GREEN
+        self.BLUE = Fore.BLUE
+        self.WHITE = Fore.WHITE
+        print(self.BLUE + 'Loading config...')
         self.ERROR = 0
         self.intents = discord.Intents.default()
         self.intents.members = True
@@ -21,9 +26,8 @@ class ConfigHandler:
             self.PASSWORD = general.get('Passwd')
             self.ACTIVITY = visual.get('Activity')
             self.GUILDS = general.get('Guilds')
-            print(self.GUILDS)
-            print('Found Token!')
-            print(self.TOKEN)
+            print(self.GREEN +'Found Token!')
+            print(self.GREEN + self.TOKEN + self.WHITE + '-\n-\n-\n-')
 
         if self.TOKEN == None:
             try:

@@ -16,7 +16,8 @@ class Start_Stop(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-            print(f'{bot.user} has been successfully connected to Discord!')
+            print(config.GREEN + f'{bot.user} has been successfully connected to Discord!')
+            print('-\n-\n-\n-')
             activity = discord.Game(config.ACTIVITY)
             await bot.change_presence(status=discord.Status.idle, activity=activity)
 
