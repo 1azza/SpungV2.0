@@ -4,33 +4,38 @@ from scripts.utils.configHandle import config, bot
 import cv2
 import numpy as np
 import re
-
+import requests
 class spung_commands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
+        self.PATH = 'profilepicture.png'
 
+
+    async def dlAvatar(self, ctx, user):
+        user = await bot.fetch_user(user)
+        url = user.display_avatar.url
+        img_data = requests.get(url).content
+        with open(self.PATH, 'wb') as handler:
+            handler.write(img_data)
+        self.IMG = cv2.imread(self.PATH)
+        await self.main_spung(ctx)
 
     async def main_spung(self, ctx):
         imgCanny =  cv2.Canny(self.IMG, 100, 100)
-        cv2.imwrite("profilepicture.png", imgCanny)
-        await ctx.send(file=discord.File('profilepicture.png'))
+        cv2.imwrite(self.PATH, imgCanny)
+        await ctx.send(file=discord.File(self.PATH))
 
     @commands.command()
     async def spung(self, ctx, arg):
             user = re.sub("[^0-9]", "", arg)
-            user = await bot.fetch_user(user)
-            await user.avatar_url_as(format="png").save(fp="profilepicture.png")
-            self.IMG = cv2.imread('profilepicture.png')
-            await self.main_spung(ctx)
+            await self.dlAvatar(ctx, user)
 
 
     @commands.command()
     async def spungbomb(self, ctx):
-        for member in ctx.guild.members:
-             await member.avatar_url_as(format="png").save(fp="profilepicture.png")
-             self.IMG = cv2.imread('profilepicture.png')
-             await self.main_spung(ctx)
+        for user in ctx.guild.members:
+            await self.dlAvatar(ctx, user)
 
     @commands.command()
     async def spunk(self, ctx):
@@ -39,8 +44,8 @@ class spung_commands(commands.Cog):
         await ctx.send('**Waiting for an attachment...**')
         resp = await bot.wait_for('message', check=check)
         image = resp.attachments[0]
-        await image.save(fp="profilepicture.png")
-        self.IMG = cv2.imread('profilepicture.png')
+        await image.save(fp=self.PATH)
+        self.IMG = cv2.imread(self.PATH)
         await self.main_spung(ctx)
 
 
